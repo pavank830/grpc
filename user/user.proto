@@ -1,0 +1,39 @@
+syntax="proto3";
+
+package user;
+option go_package="github.com/pavank830/user";
+
+message UserInfo {
+    int64 id = 1;
+    string fname = 2;
+    string city = 3;
+    int64 phone = 4;
+    float height = 5; 
+    bool Married = 6;
+}
+
+message UserReq {
+    int64 id = 1;
+}
+
+message UserResp {
+    UserInfo User = 1;
+    int32 code = 2;
+    string message =3;
+
+}
+
+message UserListReq {
+    repeated int64 UserIDList = 1;
+}
+
+message UserListResp {
+    repeated UserInfo UserList = 1;
+    int32 code = 2;
+    string message =3;
+}
+
+service UserDetails {
+    rpc GetUserByID(UserReq) returns (UserResp) {};
+    rpc ListUsersByID(UserListReq) returns (UserListResp) {};
+}
